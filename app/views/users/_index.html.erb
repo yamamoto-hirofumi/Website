@@ -1,0 +1,26 @@
+<div class="row mb-4">
+  <table class="table table-borderless table-hover">
+  <thead class="table-info">
+    <tr class="text-center">
+      <th scope="col-md-3">プロフィール画像</th>
+      <th scope="col-md-3">名前</th>
+      <th scope="col-md-4">プロフィール</th>
+      <th scope="col-md-2">投稿数</th>
+    </tr>
+  </thead>
+ <% users.each do |user| %>
+      <tbody>
+        <tr class="text-center">
+          <th scope="row">
+            <%= link_to user_path(user) do %>
+              <%= attachment_image_tag user, :profile_image, size: "80x80", format: 'jpeg', fallback: "no_image.jpg", class: "rounded-circle" %>
+            <% end %>
+          </th>
+          <td><%= link_to user.name, user_path(user) %></td>
+          <td><%= user.introduction%></td>
+          <td><%= user.posts.count %></td>
+        </tr>
+      </tbody>
+    <% end %>
+</table>
+<%= paginate @users %>

@@ -1,0 +1,12 @@
+<div class="contianer">
+  <% if current_user == @user %>
+    <h2 class="text-center p-3">フォロー中</h2>
+   <% else %>
+    <h2 class="text-center p-3"><%= @user.name %>さんがフォロー中</h2>
+  <% end %>
+  <% if @users.exists? %>
+    <%= render "users/index", users: @users %>
+  <% else %>
+    <p class="text-center">フォローしているユーザーはいません</p>
+  <% end %>
+</div>

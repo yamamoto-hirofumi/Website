@@ -1,0 +1,25 @@
+<div class="container">
+  <h2 class="text-center p-3"><%= @user.name %>さんとのChat</h2>
+  <div class="mt-3 offset-3 col-5 chat" id="message">
+    <% @chats.each do |chat| %>
+  <% if chat.user_id == current_user.id %>
+    <p class="mt-3" style="text-align: right;">
+      <span class="chat-right p-1"><%= chat.message %></span><br>
+      <span class="chat-time"><%= time_ago_in_words(chat.created_at) %>前</span>
+    </p>
+  <% else %>
+    <p class="mt-3" style="text-align: left;">
+      <span class="chat-left p-1"><%= chat.message %></span><br>
+      <span class= "chat-time"><%= time_ago_in_words(chat.created_at) %>前</span>
+    </p>
+  <% end %>
+<% end %>
+  </div>
+  <div class="text-center m-5">
+    <%= form_with model: @chat, remote: true do |f| %>
+      <%= f.text_field :message %>
+      <%= f.hidden_field :room_id %>
+      <%= f.submit "送信", class: "btn btn-sm btn-success" %>
+    <% end %>
+  </div>
+</div>

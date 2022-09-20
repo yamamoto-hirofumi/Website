@@ -1,0 +1,56 @@
+<div class="container">
+  <h2 class="text-center p-3">投稿詳細</h2>
+  <div class="row">
+      <%= attachment_image_tag @post, :image, size: "300x300", format: "jpeg", fallback: "post_no_image.jpeg", class: "offset-2 col-4" %>
+    <div class="col-6 mt-2">
+      <% if user_signed_in? %>
+        <p>Writer: <%= link_to @post.user.name, user_path(@post.user) %></p>
+      <% else %>
+        <p>Writer: <%= @post.user.name %></p>
+      <% end %>
+      <p>Title: <%= @post.title %></p>
+      <P>
+        Tag:
+        <% @post.tags.each do |tag| %>
+          <%= tag.name %>
+        <% end %>
+      </P>
+      <p>Content: <%= @post.content %></p>
+      <p class="comments-count">コメント数: <%= @post.post_comments.count %></p>
+      <p id="like-box"><%= render "favorites/favorite-btn", post: @post %></p>
+      <p>投稿日: <%= @post.created_at.strftime('%Y/%m/%d') %></p>
+      <% if @post.written_by?(current_user) %>
+        <%= link_to "編集", edit_post_path(@post), class: "btn btn-primary btn-sm" %>
+        <%= link_to "削除", post_path(@post), method: :delete,"data-confirm" => "本当に削除しますか？", class: "btn btn-danger btn-sm" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-3">
+  <div class="row">
+    <h3 class="offset-2 col-4">コメント欄</h3>
+    <h3 class="offset-2 col-4">いいねした会員</h3>
+  </div>
+  <div class="row">
+    <div class="offset-2 col-4">
+      <% if user_signed_in? %>
+        <%= form_with model:[@post, @comment] do |f| %>
+          <%= render "layouts/errors", obj: @comment %>
+          <p>
+            <%= f.text_area :comment, rows:"2", placeholder: "コメント入力欄" %>
+            <%= f.submit "コメント", class: "btn btn-success btn-sm" %>
+          </p>
+        <% end %>
+      <% end %>
+      <div class="comments-index">
+        <%= render "post_comments/comment", post: @post %>
+      </div>
+    </div>
+    <div class="col-4 offset-2">
+      <table calss="table" id="favorite-users">
+        <%= render "favorites/favorite-users", favorites: @favorites %>
+      </table>
+    </div>
+  </div>
+</div>

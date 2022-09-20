@@ -1,0 +1,61 @@
+<div class="container">
+  <% if current_user.id == @user.id %>
+    <h2 class="text-center p-3">マイページ</h2>
+  <% else %>
+    <h2 class="text-center p-3"><%= @user.name %>さんのページ</h2>
+  <% end %>
+
+  <div class="row mb-4">
+    <div class="col-3 offset-1 mt-3">
+      <p class="mb-0 ml-4"><%= login_history_image %></p>
+      <p><%= attachment_image_tag @user, :profile_image, size: "150x150", format: 'jpeg', fallback: "no_image.jpg", class: "rounded-circle" %></p>
+      <p>
+        <%= @user.name %>
+        <% if @user.id == current_user.id %>
+          <%= link_to "", edit_user_path(@user), class: "btn btn-outline-secondary fas fa-user-cog m-2" %>
+        <% end %>
+      </p>
+      <p><%= @user.introduction %></p>
+      <% if current_user.id != @user.id %>
+        <p id="follow-button">
+          <%= render "relationships/follow_button", user: @user %>
+        </p>
+      <% end %>
+      <p id="chat-button">
+        <%= render "chats/chat_button", user: @user %>
+      </p>
+      <table class="row">
+      <tr>
+        <th>フォロー</th>
+        <th>フォロワー</th>
+      </tr>
+      <tr class="text-center">
+        <td id="followings-count"><%= render "relationships/follow_count_following", user: @user %></td>
+        <td id="followers-count"><%= render "relationships/follow_count_follower", user: @user %></td>
+      </tr>
+      </table>
+      <% if user_signed_in? && @user == current_user %>
+        <%= link_to "退会する", users_withdraw_path, class: "btn btn-sm btn-danger m-3" %>
+      <% end %>
+    </div>
+
+    <div class="col-7 offset-1">
+      <% @posts.each do |post| %>
+        <div class="row mt-3">
+          <%= attachment_image_tag post, :image,size: "200x200", format: "jpeg", fallback: "post_no_image.jpeg" %>
+          <div class="col-6 mt-5">
+            <p>
+              Title:
+              <%= link_to post_path(post) do %>
+                <%= post.title %>
+              <% end %>
+            </p>
+            <p><%= post.post_comments.count %>コメント</p>
+            <p><%= post.favorites.count %>いいね</p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <%= paginate @posts %>
+</div>

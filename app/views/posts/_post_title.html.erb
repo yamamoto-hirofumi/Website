@@ -1,0 +1,9 @@
+<% if keyword.present? %>
+  <h2 class="text-center p-3"><span class="text-primary m-2"><%= keyword %></span>が含まれる投稿</h2>
+<% elsif sort_keyword.present? %>
+  <h2 class="text-center p-3"><%= sort_selection %></h2>
+<% elsif params[:tag].present? %>
+  <h2 class="text-center p-3">Tagが<span class="text-primary m-2"><%= params[:tag] %></span>の投稿</h2>
+<% else %>
+  <h2 class="text-center p-3">投稿一覧</h2>
+<% end %>

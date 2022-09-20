@@ -1,0 +1,10 @@
+<% favorites.each do |favorite| %>
+  <tbody>
+    <td><%= attachment_image_tag favorite.user, :profile_image, size: "50x50", format: 'jpeg', fallback: "no_image.jpg", class: "rounded-circle" %></td>
+    <% if user_signed_in? %>
+      <td class="pl-3"><%= link_to favorite.user.name, user_path(favorite.user) %></td>
+    <% else %>
+      <td class="pl-3"><%= favorite.user.name %></td>
+    <% end %>
+  </tbody>
+<% end %>

@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <h1 class="col-12 text-center  my-3">新規投稿</h1>
+  </div>
+  <div class="col-8 offset-4">
+    <p id="error" class="offset-2"><%= flash[:error] %></p>
+    <%= form_with model: @post, url: posts_path, local: true do |f| %>
+    <%= render "layouts/errors", obj: @post %>
+      <table class="table table-borderless">
+        <tbody>
+          <tr>
+            <td><%= f.label :image, "投稿画像" %></td>
+            <td><%= f.attachment_field :image %></td>
+          </tr>
+          <tr>
+            <td><%= f.label :title, "Title" %></td>
+            <td><%= f.text_field :title, :size=>"30", placeholder: "伏見稲荷神社" %></td>
+          </tr>
+          <tr>
+            <td><%= f.label :content, "Content" %></td>
+            <td><%= f.text_area :content, :size=>"30x5", placeholder: "千本鳥居が幻想的！！" %></td>
+          </tr>
+          <tr>
+            <td><%= f.label :tag_ids, "Tag" %></td>
+            <td>
+              <%= f.text_field :tag_ids, placeholder: "神社,京都", :size=>"30" %><br>
+              ※複数つける際は , で区切ってください
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><%= f.submit "新規投稿", class: "btn btn-success mt-4" %></td>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>

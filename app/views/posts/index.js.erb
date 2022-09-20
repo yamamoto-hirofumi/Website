@@ -1,0 +1,2 @@
+$(".post-title").html("<%= j(render "posts/post_title", keyword: @keyword, sort_keyword: @sort_keyword)%>");
+$(".post_index").html("<%= j(render "posts/index", posts: @posts) %>");

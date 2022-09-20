@@ -1,0 +1,35 @@
+<h1 class="text-center m-4 top-header"><b>Welcome to Make enjoy life</b></h1>
+<div id="container">
+  <div id="theTarget">
+    <div class="image1"></div>
+    <div class="image2"></div>
+    <div class="image3"></div>
+    <div class="image4"></div>
+    <div class="image5"></div>
+  </div>
+</div>
+<div class="container">
+  <h2 class="text-center m-3">いいねランキング</h2>
+  <% @post_favorite_ranks.each.with_index(1) do |post, i| %>
+    <h3 class="offset-2"><b>第<%= i %>位</b></h3>
+    <div class="row mb-3">
+      <%= attachment_image_tag post, :image, size: "200x200", format: "jpeg", fallback: "post_no_image.jpeg", class: "col-4 offset-2" %>
+      <div class="col-6">
+        <div class="row">
+          <p><%= attachment_image_tag post.user, :profile_image, size: "100x100", format: 'jpeg', fallback: "no_image.jpg", class: "rounded-circle" %></p>
+          <p class="d-flex align-items-center ml-3">
+            <%= post.user.name %>
+          </p>
+        </div>
+        <p class="col-6">
+          Title:
+          <%= link_to post.title, post_path(post) %>
+        </p>
+        <div class="row">
+          <p class="col-3"><%= post.post_comments.count %>コメント</p>
+          <p class="col-3"><%= post.favorites.count %>いいね</p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

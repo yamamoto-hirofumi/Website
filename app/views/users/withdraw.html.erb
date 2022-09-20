@@ -1,0 +1,11 @@
+<div class="container">
+  <h2 class="text-center p-3">退会画面</h2>
+  <div class="text-center">
+    <b>本当に退会しますか？</b>
+    <p class="mt-3">これまでの投稿等の記録が全て削除されます</p>
+    <p>
+      <%= link_to '退会しない', user_path(current_user), class: "m-3" %>
+      <%= link_to "退会する", user_path(current_user.id), method: :delete, "data-confirm" => "本当に退会しますか？", class: "m-3" %>
+    </p>
+  </div>
+</div>

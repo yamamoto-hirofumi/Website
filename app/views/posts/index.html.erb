@@ -1,0 +1,19 @@
+<div class="offset-9 my-3">
+  <%= render 'posts/search' %>
+</div>
+<div class="offset-9 my-3">
+    <%= render "posts/sort_form", post: @post %>
+</div>
+<div class="container">
+  <div class="post-title">
+    <%= render "posts/post_title", keyword: @keyword, sort_keyword: @sort_keyword %>
+  </div>
+  <div class="row">
+    <div class="col-2">
+      <%= render 'posts/tag', tags: @tag_ranks %>
+    </div>
+    <div class="col-10 post_index">
+      <%= render "posts/index", posts: @posts %>
+    </div>
+  </div>
+</div>

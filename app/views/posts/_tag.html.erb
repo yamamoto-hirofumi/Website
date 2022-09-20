@@ -1,0 +1,14 @@
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th class="text-center">人気タグTop5</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% tags.each do |tag| %>
+				<tr>
+				<td style="border: none"><%= link_to tag.name, posts_path({tag: tag.name}), remote: true %>(<%= tag.posts.count %>)</td>
+				</tr>
+		<% end %>
+	</tbody>
+</table>

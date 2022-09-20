@@ -1,0 +1,35 @@
+<div class='container'>
+  <div class='row'>
+    <div class="col-12">
+      <h2 class="text-center m-3">ログイン</h2>
+
+      <%= form_with model: @user, url: user_session_path, local: true do |f| %>
+        <div class="text-center mb-3">
+          <%= f.label :email, "メール" %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", id: "session_email" %>
+        </div>
+
+        <div class="text-center mb-2">
+          <%= f.label :password, "パスワード" %><br />
+          <%= f.password_field :password, autocomplete: "current-password", id: "session_password" %>
+        </div>
+
+        <% if devise_mapping.rememberable? %>
+          <div class="text-center mb-3">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+          </div>
+        <% end %>
+        <div class="text-center m-3">
+          <%= f.submit "ログイン", class: "btn btn-primary btn-sm" %>
+        </div>
+      <% end %>
+
+      <p class="text-center">
+        登録まだの方は
+        <%= link_to "こちら", new_user_registration_path %>
+        から新規登録をお願いします
+      </p>
+    </div>
+  </div>
+</div>

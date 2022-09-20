@@ -1,0 +1,4 @@
+$('#message').append(
+    "<p class=\"mt-3\" style=\"text-align: right;\"><span class=\"chat-right p-1\"><%= @chat.message %></span><br><span class=\"chat-time\"><%= time_ago_in_words(@chat.created_at) %>前</span></p>"
+);
+$('input[type=text]').val("")
